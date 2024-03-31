@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+{% block Contenedor%}
+{% load static %}
+<br>
+    <div class="container">
+        <h1>Pagos realizados </h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Monto</th>
+                    <th>Nombre del profesor</th>
+                      
+                </tr>
+            </thead>
+            <tbody>
+                {% for pago in pagos %}
+                <tr>
+                    <td>{{ pago.fecha }}</td>
+                    <td>{{ pago.monto }}</td>
+                    {% if user.is_staff %}
+                    <td>{{ pago.area }}</td>
+                    {% else %}
+                    <td>{{ pago.user }}</td>
+                    {% endif %}
+                    
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">No hay items.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock%}
